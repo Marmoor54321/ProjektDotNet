@@ -4,7 +4,7 @@
 namespace ProjektDotNet.Models
 {
     public class Posts
-    {
+    {//huj
         public int Id { get; set; }
         [Required]
         [MaxLength(50)]
