@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjektDotNet.Data;
 using ProjektDotNet.Models;
@@ -33,7 +34,32 @@ namespace ProjektDotNet.Controllers
             return View(uzytkownicy.ToList());
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.GroupId = new SelectList(_context.Groups, "Id", "Name");//lista grup wyœwietlana
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                // Dodanie nowego u¿ytkownika do bazy danych
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+
+                // Przekierowanie do akcji Index po zapisaniu
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Jeœli wyst¹pi³y b³êdy walidacji, przekazanie listy grup do widoku
+            ViewBag.GroupId = new SelectList(_context.Groups, "Id", "Name", user.GroupId);
+
+            return View(user);
+        }
 
         public IActionResult Privacy()
         {
