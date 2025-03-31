@@ -19,7 +19,8 @@ namespace ProjektDotNet.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var uzytkownicy = _context.User.ToList();
+            return View(uzytkownicy);
         }
 
         public IActionResult Privacy()
