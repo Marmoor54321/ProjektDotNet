@@ -17,11 +17,22 @@ namespace ProjektDotNet.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder)
         {
-            var uzytkownicy = _context.User.ToList();
-            return View(uzytkownicy);
+            var uzytkownicy = _context.User.Include(u => u.Group).AsQueryable();
+
+            uzytkownicy = sortOrder switch
+            {
+                "name" => uzytkownicy.OrderBy(u => u.Name),
+                "firstname" => uzytkownicy.OrderBy(u => u.FirstName),
+                "lastname" => uzytkownicy.OrderBy(u => u.LastName),
+                "group" => uzytkownicy.OrderBy(u => u.Group != null ? u.Group.Name : ""),
+            };
+
+            return View(uzytkownicy.ToList());
         }
+
+
 
         public IActionResult Privacy()
         {
