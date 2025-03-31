@@ -27,6 +27,7 @@ namespace ProjektDotNet.Controllers
                 "firstname" => uzytkownicy.OrderBy(u => u.FirstName),
                 "lastname" => uzytkownicy.OrderBy(u => u.LastName),
                 "group" => uzytkownicy.OrderBy(u => u.Group != null ? u.Group.Name : ""),
+                _ => uzytkownicy.OrderBy(u => u.Id)
             };
 
             return View(uzytkownicy.ToList());

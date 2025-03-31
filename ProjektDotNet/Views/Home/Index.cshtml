@@ -6,7 +6,18 @@
 
 <h2>Lista Użytkowników</h2>
 
-<table class="table table-striped">
+<form method="get" action="@Url.Action("Index", "Home")" class="mb-3">
+    <label for="sortOrder">Sortuj według:</label>
+    <select name="sortOrder" id="sortOrder" class="form-control">
+        <option value="name">Nazwa użytkownika</option>
+        <option value="firstname">Imię</option>
+        <option value="lastname">Nazwisko</option>
+        <option value="group">Grupa</option>
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Sortuj</button>
+</form>
+
+<table class="table table-striped mt-3">
     <thead>
         <tr>
             <th>ID</th>
