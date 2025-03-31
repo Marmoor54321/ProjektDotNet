@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 //exception po³¹czenia z baz¹
-builder.Services.AddDbContext<UsersContext>(options =>
+/*builder.Services.AddDbContext<UsersContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         sqlServerOptions => sqlServerOptions.EnableRetryOnFailure() 
-    ));
+    ));*/
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

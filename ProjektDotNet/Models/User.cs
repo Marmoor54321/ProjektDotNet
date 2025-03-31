@@ -9,7 +9,7 @@ namespace ProjektDotNet.Models
         [Required]
         [Column(TypeName = "VarChar(50)")]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [MaxLength(256)]
         public string Bio { get; set; }
         [MaxLength(50)]
